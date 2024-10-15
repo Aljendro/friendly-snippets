@@ -2,15 +2,15 @@
   "SECTION: LOGGING **********************************************************": {},
 
   "JSON.stringify()": {
-    "prefix": "JS",
+    "prefix": "js",
     "body": "JSON.stringify($0)"
   },
   "JSON.stringify() pretty": {
-    "prefix": "JSp",
+    "prefix": "jsp",
     "body": "JSON.stringify($0, null, 2)"
   },
   "JSON.parse()": {
-    "prefix": "JSpa",
+    "prefix": "jspa",
     "body": "JSON.parse($0)"
   },
   "console.log": {
@@ -34,23 +34,23 @@
 
   "let statement": {
     "prefix": "l",
-    "body": "let ${1:name};"
+    "body": "let ${1:name}$0;"
   },
   "const statement": {
     "prefix": "c",
-    "body": "const ${1:name} = ${2};"
+    "body": "const ${2:name} = ${1:value};"
   },
   "const assignment awaited": {
     "prefix": "ca",
-    "body": "const ${1:name} = await ${2:value};"
+    "body": "const ${2:name} = await ${1:value};"
   },
   "const destructuring assignment awaited": {
     "prefix": "cad",
-    "body": "const { ${1:name} } = await ${2:value};"
+    "body": "const { ${2:name} } = await ${1:value};"
   },
   "const statement from destructuring": {
     "prefix": "cdo",
-    "body": "const { ${2:prop} } = ${1:value}:"
+    "body": "const { ${2:prop} } = ${1:value};"
   },
   "const statement from array destructuring": {
     "prefix": "cda",
@@ -58,7 +58,7 @@
   },
   "const arrow function assignment": {
     "prefix": "cf",
-    "body": "const ${1:name} = (${2:arguments}) => {\n\t${0}\n}"
+    "body": "const ${1:name} = (${2:arguments}) => {\n\t${0}\n};"
   },
   "ternary assignment": {
     "prefix": "cte",
@@ -157,8 +157,8 @@
     "body": "${1:iterable}.some((${2:item}) => {\n\t${0}\n})"
   },
   "forEach loop": {
-    "prefix": "fe",
-    "body": "${1:iterable}.forEach((${2:item}) => {\n\t${0}\n})"
+    "prefix": "foreach",
+    "body": "${1:iterable}.forEach((${2:item}) => {\n\t${0}\n});"
   },
   "map": {
     "prefix": "map",
@@ -176,70 +176,70 @@
   "SECTION: OBJECT **********************************************************": {},
 
   "Object.assign": {
-    "prefix": "oa",
+    "prefix": "Obja",
     "body": "Object.assign(${1:dest}, ${2:source})"
   },
   "Object.create": {
-    "prefix": "oc",
+    "prefix": "Objc",
     "body": "Object.create(${1:obj})"
   },
   "Object.getOwnPropertyDescriptor": {
-    "prefix": "og",
+    "prefix": "Objg",
     "body": "Object.getOwnPropertyDescriptor(${1:obj}, '${2:prop}')"
   },
   "Object.defineProperty": {
-    "prefix": "od",
+    "prefix": "Objd",
     "body": "Object.defineProperty(${1:dest}, '${2:prop}', {\n\t${0}\n})"
   },
   "Object.keys": {
-    "prefix": "ok",
+    "prefix": "Objk",
     "body": "Object.keys(${1:obj})"
   },
   "Object.values": {
-    "prefix": "ov",
+    "prefix": "Objv",
     "body": "Object.values(${1:obj})"
   },
   "Object.entries": {
-    "prefix": "oe",
+    "prefix": "Obje",
     "body": "Object.entries(${1:obj})"
   },
   "Object.freeze": {
-    "prefix": "of",
+    "prefix": "Objf",
     "body": "Object.freeze(${1:obj})"
   },
 
   "SECTION: FUNCTIONS **********************************************************": {},
 
   "named function": {
-    "prefix": "fn",
+    "prefix": "fun",
     "body": "function ${1:name} (${2:arguments}) {\n\t${0}\n}"
   },
   "async function": {
-    "prefix": "fna",
+    "prefix": "funa",
     "body": "async function (${1:arguments}) {\n\t${0}\n}"
   },
   "arrow function": {
-    "prefix": "fc",
+    "prefix": "func",
     "body": "(${1:arguments}) => {\n\t${0}\n}"
   },
   "async arrow function": {
-    "prefix": "fca",
+    "prefix": "funca",
     "body": "async (${1:arguments}) => {\n\t${0}\n}"
   },
   "immediately-invoked function expression": {
     "prefix": "iife",
-    "body": ";(function (${1:arguments}) {\n\t${0}\n})(${2})"
+    "body": "(function (${1:arguments}) {\n\t${0}\n})(${2});"
   },
   "async immediately-invoked function expression": {
     "prefix": "aiife",
-    "body": ";(async (${1:arguments}) => {\n\t${0}\n})(${2})"
+    "body": "(async (${1:arguments}) => {\n\t${0}\n})(${2});"
   },
   "Node callback": {
-    "prefix": "fncb",
+    "prefix": "funn",
     "body": "function (err, ${1:value}) {\n\tif (err) throw err\n\t${0}\n}"
   },
   "named generator": {
-    "prefix": "fg",
+    "prefix": "fung",
     "body": "function* ${1:name}(${2:arguments}) {\n\t${0}\n}"
   },
   "yield": {
@@ -272,11 +272,6 @@
     ],
     "description": "For Loop"
   },
-  "For-Each Loop": {
-    "prefix": "foreach",
-    "body": ["${1:array}.forEach(${2:element} => {", "\t$0", "});"],
-    "description": "For-Each Loop"
-  },
   "For-In Loop": {
     "prefix": "forin",
     "body": [
@@ -291,11 +286,11 @@
   },
   "For-Of Loop": {
     "prefix": "forof",
-    "body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
+    "body": ["for (const ${1:item} of ${2:object}) {", "\t$0", "}"],
     "description": "For-Of Loop"
   },
   "For-Await-Of Loop": {
-    "prefix": "forawaitof",
+    "prefix": "forofa",
     "body": ["for await (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
     "description": "For-Await-Of Loop"
   },
@@ -303,19 +298,19 @@
   "SECTION: EXCEPTIONS **********************************************************": {},
 
   "try/catch": {
-    "prefix": "tc",
+    "prefix": "tryc",
     "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$0\n}"
   },
   "try/finally": {
-    "prefix": "tf",
+    "prefix": "tryf",
     "body": "try {\n\t$1\n} finally {\n\t$0\n}"
   },
   "try/catch/finally": {
-    "prefix": "tcf",
+    "prefix": "trycf",
     "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$3\n} finally {\n\t$4\n}"
   },
   "throw new Error": {
-    "prefix": "tn",
+    "prefix": "thrown",
     "body": "throw new ${0:error};"
   },
 
@@ -323,43 +318,43 @@
 
   "describe": {
     "prefix": "td",
-    "body": "describe('${1:description}', () => {\n\t${0}\n})"
+    "body": "describe('${1:description}', () => {\n\t${0}\n});"
   },
   "describe top level": {
-    "prefix": "tdh",
-    "body": "describe('${TM_FILENAME_BASE}', () => {\n\t${0}\n})"
+    "prefix": "tdt",
+    "body": "describe('${TM_FILENAME_BASE}', () => {\n\t${0}\n});"
   },
   "it asynchronous": {
-    "prefix": "it",
-    "body": "it('${1:description}', async () => {\n\t${0}\n})"
+    "prefix": "tit",
+    "body": "it('${1:description}', async () => {\n\t${0}\n});"
   },
   "it synchronous": {
-    "prefix": "its",
-    "body": "it('${1:description}', () => {\n\t${0}\n})"
+    "prefix": "tits",
+    "body": "it('${1:description}', () => {\n\t${0}\n});"
   },
   "it.todo": {
-    "prefix": "itt",
-    "body": "it.todo('${1:description}')"
+    "prefix": "titt",
+    "body": "it.todo('${1:description}');"
   },
   "it with a callback": {
-    "prefix": "itc",
-    "body": "it('${1:description}', (done) => {\n\t${0}\n})"
+    "prefix": "titc",
+    "body": "it('${1:description}', (done) => {\n\t${0}\n});"
   },
   "beforeAll": {
     "prefix": "tba",
-    "body": "beforeAll(async () => {\n\t${0}\n})"
+    "body": "beforeAll(async () => {\n\t${0}\n});"
   },
   "before": {
     "prefix": "tbe",
-    "body": "beforeEach(async () => {\n\t${0}\n})"
+    "body": "beforeEach(async () => {\n\t${0}\n});"
   },
   "afterAll": {
     "prefix": "taa",
-    "body": "afterAll(() => {\n\t${0}\n})"
+    "body": "afterAll(() => {\n\t${0}\n});"
   },
   "afterEach": {
     "prefix": "tae",
-    "body": "afterEach(() => {\n\t${0}\n})"
+    "body": "afterEach(() => {\n\t${0}\n});"
   },
 
   "SECTION: ASYNCHRONOUS **********************************************************": {},
@@ -376,15 +371,15 @@
   },
   "setImmediate": {
     "prefix": "setimmediate",
-    "body": "setImmediate(() => {\n\t${0}\n})"
+    "body": "setImmediate(() => {\n\t${0}\n});"
   },
   "event handler": {
     "prefix": "deh",
-    "body": "${1:emitter}.on('${2:event}', (${3:arguments}) => {\n\t${0}\n})"
+    "body": "${1:emitter}.on('${2:event}', (${3:arguments}) => {\n\t${0}\n});"
   },
   "dom event cancel default and propagation": {
     "prefix": "deb",
-    "body": "ev.preventDefault()\nev.stopPropagation()\nreturn false"
+    "body": "ev.preventDefault();\nev.stopPropagation();\nreturn false;"
   },
   "addEventListener": {
     "prefix": "del",
@@ -396,19 +391,19 @@
   },
   "await": {
     "prefix": "a",
-    "body": "await ${0}"
+    "body": "await ${0};"
   },
   "await Promise.all": {
     "prefix": "apa",
-    "body": "await Promise.all(${1:value})"
+    "body": "await Promise.all(${1:value});"
   },
   "await Promise.all map": {
     "prefix": "apm",
-    "body": "await Promise.all(${1:array}.map(async (${2:value}) => {\n\t${0}\n}))"
+    "body": "await Promise.all(${1:array}.map(async (${2:value}) => {\n\t${0}\n}));"
   },
   "await sleep": {
     "prefix": "at",
-    "body": "await new Promise((r) => setTimeout(r, ${0}))"
+    "body": "await new Promise((r) => setTimeout(r, ${0}));"
   },
   "Promise.all": {
     "prefix": "pa",

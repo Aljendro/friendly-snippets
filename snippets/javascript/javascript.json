@@ -316,6 +316,10 @@
 
   "SECTION: TESTING **********************************************************": {},
 
+  "debugger statement": {
+    "prefix": "d;",
+    "body": "debugger;"
+  },
   "describe": {
     "prefix": "td",
     "body": "describe('${1:description}', () => {\n\t${0}\n});"

@@ -1,566 +1,267 @@
 {
-  "SECTION: LOGGING **********************************************************": {},
-
   "JSON.stringify()": {
-    "prefix": "js",
+    "prefix": ";js",
     "body": "JSON.stringify($0)"
   },
   "JSON.stringify() pretty": {
-    "prefix": "jsp",
+    "prefix": ";jsp",
     "body": "JSON.stringify($0, null, 2)"
   },
   "JSON.parse()": {
-    "prefix": "jspa",
+    "prefix": ";jp",
     "body": "JSON.parse($0)"
   },
   "console.log": {
-    "prefix": "cl",
+    "prefix": ";ll",
     "body": "console.log(${0});"
   },
-  "console.log a variable": {
-    "prefix": "clv",
-    "body": "console.log('${1}:', ${1});"
+  "console.info": {
+    "prefix": ";li",
+    "body": "console.info(${0});"
   },
   "console.error": {
-    "prefix": "ce",
+    "prefix": ";le",
     "body": "console.error(${0});"
   },
   "console.warn": {
-    "prefix": "cw",
+    "prefix": ";lw",
     "body": "console.warn(${0});"
   },
-
-  "SECTION: ASSIGNMENTS **********************************************************": {},
-
   "let statement": {
-    "prefix": "l",
-    "body": "let ${1:name}$0;"
+    "prefix": ";l",
+    "body": "let ${2:name} = ${1:value};"
   },
   "const statement": {
-    "prefix": "c",
+    "prefix": ";c",
     "body": "const ${2:name} = ${1:value};"
   },
   "const assignment awaited": {
-    "prefix": "ca",
+    "prefix": ";ca",
     "body": "const ${2:name} = await ${1:value};"
   },
-  "const destructuring assignment awaited": {
-    "prefix": "cad",
-    "body": "const { ${2:name} } = await ${1:value};"
-  },
-  "const statement from destructuring": {
-    "prefix": "cdo",
-    "body": "const { ${2:prop} } = ${1:value};"
-  },
-  "const statement from array destructuring": {
-    "prefix": "cda",
-    "body": "const [ ${2:prop} ] = ${1:value};"
-  },
   "const arrow function assignment": {
-    "prefix": "cf",
+    "prefix": ";cf",
     "body": "const ${1:name} = (${2:arguments}) => {\n\t${0}\n};"
   },
-  "ternary assignment": {
-    "prefix": "cte",
-    "body": "const ${0} = ${1:cond} ? ${2:true} : ${3:false};"
-  },
   "process.env": {
-    "prefix": "cpe",
-    "body": "process.env"
+    "prefix": ";pe",
+    "body": "const { $0 } = process.env;"
   },
-
-  "SECTION: IMPORT/EXPORT **********************************************************": {},
-
-  "module export": {
-    "prefix": "e",
-    "body": "export"
+  "module default": {
+    "prefix": ";e",
+    "body": "export { ${1:member} };"
   },
   "module default export": {
-    "prefix": "ed",
+    "prefix": ";ed",
     "body": "export default ${1:member};"
   },
   "import module": {
-    "prefix": "imp",
+    "prefix": ";imp",
     "body": "import ${2:*} from '${1:module}';"
   },
   "import module as": {
-    "prefix": "impa",
+    "prefix": ";impa",
     "body": "import ${2:*} as ${3:name} from '${1:module}';"
   },
   "require": {
-    "prefix": "req",
-    "body": "const ${1} = require('${1:module}');"
-  },
-  "require destructured": {
-    "prefix": "reqd",
-    "body": "const {${2}} = require('${1:module}');"
+    "prefix": ";req",
+    "body": "const { ${2} } = require('${1:module}');"
   },
   "module.exports": {
-    "prefix": "me",
-    "body": "module.exports = {${1:name}};"
+    "prefix": ";me",
+    "body": "module.exports = { ${1:name} };"
   },
-
-  "SECTION: CONDITIONS **********************************************************": {},
-
   "If Statement": {
-    "prefix": "if",
-    "body": ["if (${1:condition}) {", "\t$0", "}"],
-    "description": "If Statement"
+    "prefix": ";if",
+    "body": ["if (${1:condition}) {", "\t$2", "}"]
   },
   "If-Else Statement": {
-    "prefix": "ife",
-    "body": ["if (${1:condition}) {", "\t$2", "} else {", "\t$3", "}"],
-    "description": "If-Else Statement"
+    "prefix": ";ife",
+    "body": ["if (${1:condition}) {", "\t$2", "} else {", "\t$3", "}"]
   },
   "else statement": {
-    "prefix": "el",
+    "prefix": ";el",
     "body": "else {\n\t${0}\n}"
   },
   "else if statement": {
-    "prefix": "eli",
+    "prefix": ";eli",
     "body": "else if (${1:condition}) {\n\t${0}\n}"
   },
   "Switch Statement": {
-    "prefix": "switch",
+    "prefix": ";switch",
     "body": [
       "switch (${1:key}) {",
       "\tcase ${2:value}:",
-      "\t\t$0",
-      "\t\tbreak;",
-      "",
+      "\t\t$3",
+      "\t\tbreak;$4",
       "\tdefault:",
+      "\t\t$5",
       "\t\tbreak;",
       "}"
-    ],
-    "description": "Switch Statement"
+    ]
   },
-
-  "SECTION: STRUCTURES **********************************************************": {},
-
   "ternary": {
-    "prefix": "te",
+    "prefix": ";te",
     "body": "${1:cond} ? ${2:true} : ${3:false}"
   },
-
-  "SECTION: FUNCTIONAL **********************************************************": {},
-
   "find": {
-    "prefix": "find",
+    "prefix": ";find",
     "body": "${1:iterable}.find((${2:item}) => {\n\t${0}\n})"
   },
   "every": {
-    "prefix": "every",
+    "prefix": ";every",
     "body": "${1:iterable}.every((${2:item}) => {\n\t${0}\n})"
   },
   "some": {
-    "prefix": "some",
+    "prefix": ";some",
     "body": "${1:iterable}.some((${2:item}) => {\n\t${0}\n})"
   },
   "forEach loop": {
-    "prefix": "foreach",
+    "prefix": ";foreach",
     "body": "${1:iterable}.forEach((${2:item}) => {\n\t${0}\n});"
   },
   "map": {
-    "prefix": "map",
+    "prefix": ";map",
     "body": "${1:iterable}.map((${2:item}) => {\n\t${0}\n})"
   },
   "reduce": {
-    "prefix": "reduce",
+    "prefix": ";reduce",
     "body": "${1:iterable}.reduce((${2:accum}, ${3:item}) => {\n\t${0}\n}${4:, initial})"
   },
   "filter": {
-    "prefix": "filter",
+    "prefix": ";filter",
     "body": "${1:iterable}.filter((${2:item}) => {\n\t${0}\n})"
   },
-
-  "SECTION: OBJECT **********************************************************": {},
-
-  "Object.assign": {
-    "prefix": "Obja",
-    "body": "Object.assign(${1:dest}, ${2:source})"
-  },
-  "Object.create": {
-    "prefix": "Objc",
-    "body": "Object.create(${1:obj})"
-  },
-  "Object.getOwnPropertyDescriptor": {
-    "prefix": "Objg",
-    "body": "Object.getOwnPropertyDescriptor(${1:obj}, '${2:prop}')"
-  },
-  "Object.defineProperty": {
-    "prefix": "Objd",
-    "body": "Object.defineProperty(${1:dest}, '${2:prop}', {\n\t${0}\n})"
-  },
   "Object.keys": {
-    "prefix": "Objk",
+    "prefix": ";objk",
     "body": "Object.keys(${1:obj})"
   },
   "Object.values": {
-    "prefix": "Objv",
+    "prefix": ";objv",
     "body": "Object.values(${1:obj})"
   },
   "Object.entries": {
-    "prefix": "Obje",
+    "prefix": ";obje",
     "body": "Object.entries(${1:obj})"
   },
   "Object.freeze": {
-    "prefix": "Objf",
+    "prefix": ";objf",
     "body": "Object.freeze(${1:obj})"
   },
-
-  "SECTION: FUNCTIONS **********************************************************": {},
-
   "named function": {
-    "prefix": "fun",
-    "body": "function ${1:name} (${2:arguments}) {\n\t${0}\n}"
-  },
-  "async function": {
-    "prefix": "funa",
-    "body": "async function (${1:arguments}) {\n\t${0}\n}"
+    "prefix": ";f",
+    "body": "${1:async} function ${2:name}(${3:arguments}) {\n\t${0}\n}"
   },
   "arrow function": {
-    "prefix": "func",
-    "body": "(${1:arguments}) => {\n\t${0}\n}"
-  },
-  "async arrow function": {
-    "prefix": "funca",
-    "body": "async (${1:arguments}) => {\n\t${0}\n}"
+    "prefix": ";fn",
+    "body": "${1:async} (${2:arguments}) => {\n\t${0}\n}"
   },
   "immediately-invoked function expression": {
-    "prefix": "iife",
-    "body": "(function (${1:arguments}) {\n\t${0}\n})(${2});"
-  },
-  "async immediately-invoked function expression": {
-    "prefix": "aiife",
-    "body": "(async (${1:arguments}) => {\n\t${0}\n})(${2});"
-  },
-  "Node callback": {
-    "prefix": "funn",
-    "body": "function (err, ${1:value}) {\n\tif (err) throw err\n\t${0}\n}"
+    "prefix": ";iife",
+    "body": "(${1:async} function (${2:arguments}) {\n\t${0}\n})(${3});"
   },
   "named generator": {
-    "prefix": "fung",
+    "prefix": ";fg",
     "body": "function* ${1:name}(${2:arguments}) {\n\t${0}\n}"
   },
-  "yield": {
-    "prefix": "y",
-    "body": "yield ${0};"
-  },
-  "return": {
-    "prefix": "r",
-    "body": "return ${0};"
-  },
-
-  "SECTION: LOOPS **********************************************************": {},
-
   "While Statement": {
-    "prefix": "while",
-    "body": ["while (${1:condition}) {", "\t$0", "}"],
-    "description": "While Statement"
+    "prefix": ";w",
+    "body": ["while (${1:condition}) {", "\t$0", "}"]
   },
   "Do-While Statement": {
-    "prefix": "dowhile",
-    "body": ["do {", "\t$0", "} while (${1:condition});"],
-    "description": "Do-While Statement"
+    "prefix": ";dw",
+    "body": ["do {", "\t$0", "} while (${1:condition});"]
+  },
+  "For-Of Loop": {
+    "prefix": ";for",
+    "body": ["for $1(const ${3:item} of ${2:object}) {", "\t$0", "}"]
   },
   "For Loop": {
-    "prefix": "for",
+    "prefix": ";fori",
     "body": [
       "for (let ${1:i} = 0; ${1:i} < ${2:count}; ${1:i}++) {",
       "\t$0",
       "}"
-    ],
-    "description": "For Loop"
+    ]
   },
-  "For-In Loop": {
-    "prefix": "forin",
-    "body": [
-      "for (const ${1:key} in ${2:object}) {",
-      "\tif (${2:object}.hasOwnProperty(${1:key})) {",
-      "\t\tconst ${3:element} = ${2:object}[${1:key}];",
-      "\t\t$0",
-      "\t}",
-      "}"
-    ],
-    "description": "For-In Loop"
-  },
-  "For-Of Loop": {
-    "prefix": "forof",
-    "body": ["for (const ${1:item} of ${2:object}) {", "\t$0", "}"],
-    "description": "For-Of Loop"
-  },
-  "For-Await-Of Loop": {
-    "prefix": "forofa",
-    "body": ["for await (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
-    "description": "For-Await-Of Loop"
-  },
-
-  "SECTION: EXCEPTIONS **********************************************************": {},
-
   "try/catch": {
-    "prefix": "tryc",
+    "prefix": ";tc",
     "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$0\n}"
   },
   "try/finally": {
-    "prefix": "tryf",
+    "prefix": ";tf",
     "body": "try {\n\t$1\n} finally {\n\t$0\n}"
   },
   "try/catch/finally": {
-    "prefix": "trycf",
+    "prefix": ";tcf",
     "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$3\n} finally {\n\t$4\n}"
   },
   "throw new Error": {
-    "prefix": "thrown",
-    "body": "throw new ${0:error};"
+    "prefix": ";throw",
+    "body": "throw new ${0:Error($1)};"
   },
-
-  "SECTION: TESTING **********************************************************": {},
-
   "debugger statement": {
-    "prefix": "d;",
+    "prefix": ";d",
     "body": "debugger;"
   },
   "describe": {
-    "prefix": "td",
+    "prefix": ";td",
     "body": "describe('${1:description}', () => {\n\t${0}\n});"
   },
-  "describe top level": {
-    "prefix": "tdt",
-    "body": "describe('${TM_FILENAME_BASE}', () => {\n\t${0}\n});"
-  },
   "it asynchronous": {
-    "prefix": "tit",
-    "body": "it('${1:description}', async () => {\n\t${0}\n});"
-  },
-  "it synchronous": {
-    "prefix": "tits",
-    "body": "it('${1:description}', () => {\n\t${0}\n});"
+    "prefix": ";tt",
+    "body": "it('${1:description}', ${2:async }() => {\n\t${0}\n});"
   },
   "it.todo": {
-    "prefix": "titt",
+    "prefix": ";ttodo",
     "body": "it.todo('${1:description}');"
   },
-  "it with a callback": {
-    "prefix": "titc",
-    "body": "it('${1:description}', (done) => {\n\t${0}\n});"
-  },
   "beforeAll": {
-    "prefix": "tba",
-    "body": "beforeAll(async () => {\n\t${0}\n});"
+    "prefix": ";tba",
+    "body": "beforeAll(${1:async }() => {\n\t${0}\n});"
   },
   "before": {
-    "prefix": "tbe",
-    "body": "beforeEach(async () => {\n\t${0}\n});"
+    "prefix": ";tbe",
+    "body": "beforeEach(${1:async }() => {\n\t${0}\n});"
   },
   "afterAll": {
-    "prefix": "taa",
-    "body": "afterAll(() => {\n\t${0}\n});"
+    "prefix": ";taa",
+    "body": "afterAll(${1:async }()=> {\n\t${0}\n});"
   },
   "afterEach": {
-    "prefix": "tae",
-    "body": "afterEach(() => {\n\t${0}\n});"
+    "prefix": ";tae",
+    "body": "afterEach(${1:async }()=> {\n\t${0}\n});"
   },
-
-  "SECTION: ASYNCHRONOUS **********************************************************": {},
-
   "Set Timeout Function": {
-    "prefix": "settimeout",
-    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"],
-    "description": "Set Timeout Function"
+    "prefix": ";st",
+    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"]
   },
   "Set Interval Function": {
-    "prefix": "setinterval",
-    "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"],
-    "description": "Set Interval Function"
-  },
-  "setImmediate": {
-    "prefix": "setimmediate",
-    "body": "setImmediate(() => {\n\t${0}\n});"
-  },
-  "event handler": {
-    "prefix": "deh",
-    "body": "${1:emitter}.on('${2:event}', (${3:arguments}) => {\n\t${0}\n});"
-  },
-  "dom event cancel default and propagation": {
-    "prefix": "deb",
-    "body": "ev.preventDefault();\nev.stopPropagation();\nreturn false;"
-  },
-  "addEventListener": {
-    "prefix": "del",
-    "body": "${1:document}.addEventListener('${2:event}', ${3:ev} => {\n\t${0}\n})"
-  },
-  "removeEventListener": {
-    "prefix": "rel",
-    "body": "${1:document}.removeEventListener('${2:event}', ${3:listener})"
-  },
-  "await": {
-    "prefix": "a",
-    "body": "await ${0};"
+    "prefix": ";si",
+    "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"]
   },
   "await Promise.all": {
-    "prefix": "apa",
-    "body": "await Promise.all(${1:value});"
+    "prefix": ";pa",
+    "body": "await Promise.all([\n\t${1:value}\n]);"
   },
   "await Promise.all map": {
-    "prefix": "apm",
+    "prefix": ";pam",
     "body": "await Promise.all(${1:array}.map(async (${2:value}) => {\n\t${0}\n}));"
   },
   "await sleep": {
-    "prefix": "at",
+    "prefix": ";ps",
     "body": "await new Promise((r) => setTimeout(r, ${0}));"
   },
-  "Promise.all": {
-    "prefix": "pa",
-    "body": "Promise.all(${1:value})"
-  },
   "Promise.resolve": {
-    "prefix": "pr",
+    "prefix": ";pr",
     "body": "Promise.resolve(${1:value})"
   },
   "Promise.reject": {
-    "prefix": "prj",
+    "prefix": ";pR",
     "body": "Promise.reject(${1:value})"
   },
-  "Promise": {
-    "prefix": "p",
-    "body": "Promise"
-  },
   "new Promise": {
-    "prefix": "pn",
+    "prefix": ";pn",
     "body": "new Promise((resolve, reject) => {\n\t${0}\n})"
-  },
-  "Promise.then": {
-    "prefix": "pt",
-    "body": "${1:promise}.then((${2:value}) => {\n\t${0}\n})"
-  },
-  "Promise.catch": {
-    "prefix": "pc",
-    "body": "${1:promise}.catch(error => {\n\t${0}\n})"
-  },
-
-  "SECTION: CLASSES **********************************************************": {},
-
-  "New Statement": {
-    "prefix": "new",
-    "body": ["const ${1:name} = new ${2:type}(${3:arguments});$0"],
-    "description": "New Statement"
-  },
-  "module as class": {
-    "prefix": "mec",
-    "body": "class ${1:name} {\n\tconstructor (${2:arguments}) {\n\t\t${0}\n\t}\n}\n\nmodule.exports = ${1:name}\n"
-  },
-  "class": {
-    "prefix": "cs",
-    "body": "class ${1:name} {\n\tconstructor (${2:arguments}) {\n\t\t${0}\n\t}\n}"
-  },
-  "class extends": {
-    "prefix": "csx",
-    "body": "class ${1:name} extends ${2:base} {\n\tconstructor (${3:arguments}) {\n\t\tsuper(${3:arguments})\n\t\t${0}\n\t}\n}"
-  },
-  "constructor": {
-    "prefix": "cn",
-    "body": "constructor () {\n\t${0}\n}"
-  },
-  "method": {
-    "prefix": "m",
-    "body": "${1:method} (${2:arguments}) {\n\t${0}\n}"
-  },
-  "getter": {
-    "prefix": "get",
-    "body": "get ${1:property} () {\n\t${0}\n}"
-  },
-  "setter": {
-    "prefix": "set",
-    "body": "set ${1:property} (${2:value}) {\n\t${0}\n}"
-  },
-  "getter + setter": {
-    "prefix": "gs",
-    "body": "get ${1:property} () {\n\t${0}\n}\nset ${1:property} (${2:value}) {\n\t\n}"
-  },
-  "prototype method": {
-    "prefix": "proto",
-    "body": "${1:Class}.prototype.${2:method} = function (${3:arguments}) {\n\t${0}\n}"
-  },
-
-  "SECTION: DOM **********************************************************": {},
-
-  "getElementById": {
-    "prefix": "dgi",
-    "body": "${1:document}.getElementById('${2:id}')"
-  },
-  "getElementsByClassName": {
-    "prefix": "dgc",
-    "body": "Array.from(${1:document}.getElementsByClassName('${2:class}'))"
-  },
-  "getElementsByTagName": {
-    "prefix": "dgt",
-    "body": "Array.from(${1:document}.getElementsByTagName('${2:tag}'))"
-  },
-  "querySelector": {
-    "prefix": "dqs",
-    "body": "${1:document}.querySelector('${2:selector}')"
-  },
-  "querySelectorAll": {
-    "prefix": "dqsa",
-    "body": "Array.from(${1:document}.querySelectorAll('${2:selector}'))"
-  },
-  "createDocumentFragment": {
-    "prefix": "dcdf",
-    "body": "${1:document}.createDocumentFragment(${2:elem})"
-  },
-  "createElement": {
-    "prefix": "dce",
-    "body": "${1:document}.createElement(${2:elem})"
-  },
-  "classList.add": {
-    "prefix": "dcla",
-    "body": "${1:el}.classList.add('${2:class}')"
-  },
-  "classList.remove": {
-    "prefix": "dclr",
-    "body": "${1:el}.classList.remove('${2:class}')"
-  },
-  "classList.toggle": {
-    "prefix": "dclt",
-    "body": "${1:el}.classList.toggle('${2:class}')"
-  },
-  "getAttribute": {
-    "prefix": "dga",
-    "body": "${1:el}.getAttribute('${2:attr}')"
-  },
-  "removeAttribute": {
-    "prefix": "dra",
-    "body": "${1:el}.removeAttribute('${2:attr}')"
-  },
-  "setAttribute": {
-    "prefix": "dsa",
-    "body": "${1:el}.setAttribute('${2:attr}', ${3:value})"
-  },
-  "appendChild": {
-    "prefix": "dac",
-    "body": "${1:el}.appendChild(${2:elem})"
-  },
-  "removeChild": {
-    "prefix": "drc",
-    "body": "${1:el}.removeChild(${2:elem})"
-  },
-
-  "SECTION: MISC **********************************************************": {},
-
-  "generate array of integers starting with 1": {
-    "prefix": "gai",
-    "body": "Array.from({ length: ${1:length} }, (v, k) => k + 1)"
-  },
-  "typeof": {
-    "prefix": "to",
-    "body": "typeof ${1:source} === '${2:undefined}'"
-  },
-  "instanceof": {
-    "prefix": "iof",
-    "body": "${1:source} instanceof ${2:Object}"
-  },
-  "use strict": {
-    "prefix": "uss",
-    "body": "'use strict'"
   }
 }

@@ -1,201 +1,296 @@
 {
-  "Constructor": {
-    "prefix": "ctor",
-    "body": ["/**", " *", " */", "constructor() {", "\tsuper();", "\t$0", "}"],
-    "description": "Constructor"
+  "JSON.stringify()": {
+    "prefix": ";js",
+    "body": "JSON.stringify($1)"
   },
-  "Class Definition": {
-    "prefix": "class",
-    "body": [
-      "class ${1:name} {",
-      "\tconstructor(${2:parameters}) {",
-      "\t\t$0",
-      "\t}",
-      "}"
-    ],
-    "description": "Class Definition"
+  "JSON.stringify() pretty": {
+    "prefix": ";jsp",
+    "body": "JSON.stringify($1, null, 2)"
   },
-  "Interface Definition": {
-    "prefix": "iface",
-    "body": ["interface ${1:name} {", "\t$0", "}"],
-    "description": "Interface Definition"
+  "JSON.parse()": {
+    "prefix": ";jp",
+    "body": "JSON.parse($1)"
   },
-  "Public Method Definition": {
-    "prefix": "public method",
-    "body": ["/**", " * ${1:name}", " */", "public ${1:name}() {", "\t$0", "}"],
-    "description": "Public Method Definition"
+  "console.log": {
+    "prefix": ";ll",
+    "body": "console.log($1);"
   },
-  "Private Method Definition": {
-    "prefix": "private method",
-    "body": ["private ${1:name}() {", "\t$0", "}"],
-    "description": "Private Method Definition"
+  "console.info": {
+    "prefix": ";li",
+    "body": "console.info($1);"
   },
-  "Import external module.": {
-    "prefix": "import statement",
-    "body": ["import { $0 } from \"${1:module}\";"],
-    "description": "Import external module."
+  "console.error": {
+    "prefix": ";le",
+    "body": "console.error($1);"
   },
-  "Property getter": {
-    "prefix": "get",
-    "body": [
-      "",
-      "public get ${1:value}() : ${2:string} {",
-      "\t${3:return $0}",
-      "}",
-      ""
-    ],
-    "description": "Property getter"
+  "console.warn": {
+    "prefix": ";lw",
+    "body": "console.warn($1);"
   },
-  "Log to the console": {
-    "prefix": "log",
-    "body": ["console.log($1);", "$0"],
-    "description": "Log to the console"
+  "let statement": {
+    "prefix": ";l",
+    "body": "let ${3:dynamic$RANDOM} = ${1:await }$2;"
   },
-  "Log warning to console": {
-    "prefix": "warn",
-    "body": ["console.warn($1);", "$0"],
-    "description": "Log warning to the console"
+  "const assignment": {
+    "prefix": ";c",
+    "body": "const ${3:static$RANDOM} = ${1:await }$2;"
   },
-  "Log error to console": {
-    "prefix": "error",
-    "body": ["console.error($1);", "$0"],
-    "description": "Log error to the console"
+  "const arrow function assignment": {
+    "prefix": ";cf",
+    "body": ["const ${1:name} = ${2:async }(${3:arguments}) => {", "\t$4", "};"]
   },
-  "Define a full property": {
-    "prefix": "prop",
-    "body": [
-      "",
-      "private _${1:value} : ${2:string};",
-      "public get ${1:value}() : ${2:string} {",
-      "\treturn this._${1:value};",
-      "}",
-      "public set ${1:value}(v : ${2:string}) {",
-      "\tthis._${1:value} = v;",
-      "}",
-      ""
-    ],
-    "description": "Define a full property"
+  "process.env": {
+    "prefix": ";pe",
+    "body": "const { $1 } = process.env;"
   },
-  "Triple-slash reference": {
-    "prefix": "ref",
-    "body": ["/// <reference path=\"$1\" />", "$0"],
-    "description": "Triple-slash reference"
+  "module default": {
+    "prefix": ";e",
+    "body": "export { ${1:member} };"
   },
-  "Property setter": {
-    "prefix": "set",
-    "body": [
-      "",
-      "public set ${1:value}(v : ${2:string}) {",
-      "\tthis.$3 = v;",
-      "}",
-      ""
-    ],
-    "description": "Property setter"
+  "module default export": {
+    "prefix": ";ed",
+    "body": "export default ${1:member};"
   },
-  "Throw Exception": {
-    "prefix": "throw",
-    "body": ["throw \"$1\";", "$0"],
-    "description": "Throw Exception"
+  "import module": {
+    "prefix": ";imp",
+    "body": "import ${2:*} from '${1:module}';"
   },
-  "For Loop": {
-    "prefix": "for",
-    "body": [
-      "for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
-      "\tconst ${3:element} = ${2:array}[${1:index}];",
-      "\t$0",
-      "}"
-    ],
-    "description": "For Loop"
+  "import module as": {
+    "prefix": ";impa",
+    "body": "import ${2:*} as ${3:name} from '${1:module}';"
   },
-  "For-Each Loop using =>": {
-    "prefix": "foreach =>",
-    "body": ["${1:array}.forEach(${2:element} => {", "\t$0", "});"],
-    "description": "For-Each Loop using =>"
+  "require": {
+    "prefix": ";req",
+    "body": "const { ${2} } = require('${1:module}');"
   },
-  "For-In Loop": {
-    "prefix": "forin",
-    "body": [
-      "for (const ${1:key} in ${2:object}) {",
-      "\tif (${2:object}.hasOwnProperty(${1:key})) {",
-      "\t\tconst ${3:element} = ${2:object}[${1:key}];",
-      "\t\t$0",
-      "\t}",
-      "}"
-    ],
-    "description": "For-In Loop"
+  "require module": {
+    "prefix": ";reqm",
+    "body": "const $1 = require('${1:module}');"
   },
-  "For-Of Loop": {
-    "prefix": "forof",
-    "body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
-    "description": "For-Of Loop"
-  },
-  "For-Await-Of Loop": {
-    "prefix": "forawaitof",
-    "body": ["for await (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
-    "description": "For-Await-Of Loop"
-  },
-  "Function Statement": {
-    "prefix": "function",
-    "body": ["function ${1:name}(${2:params}:${3:type}) {", "\t$0", "}"],
-    "description": "Function Statement"
+  "module.exports": {
+    "prefix": ";me",
+    "body": "module.exports = ${1:export};"
   },
   "If Statement": {
-    "prefix": "if",
-    "body": ["if (${1:condition}) {", "\t$0", "}"],
-    "description": "If Statement"
+    "prefix": ";if",
+    "body": ["if (${1:condition}) {", "\t$2", "}"]
   },
   "If-Else Statement": {
-    "prefix": "ifelse",
-    "body": ["if (${1:condition}) {", "\t$0", "} else {", "\t", "}"],
-    "description": "If-Else Statement"
+    "prefix": ";ife",
+    "body": ["if (${1:condition}) {", "\t$2", "} else {", "\t$3", "}"]
   },
-  "New Statement": {
-    "prefix": "new",
-    "body": ["const ${1:name} = new ${2:type}(${3:arguments});$0"],
-    "description": "New Statement"
+  "else statement": {
+    "prefix": ";el",
+    "body": ["else {", "\t${1}", "}"]
+  },
+  "else if statement": {
+    "prefix": ";elif",
+    "body": ["else if (${1:condition}) {", "\t${2}", "}"]
   },
   "Switch Statement": {
-    "prefix": "switch",
+    "prefix": ";sw",
+    "body": ["switch (${1:key}) {", "\t$2", "}"]
+  },
+  "Switch Case Statement": {
+    "prefix": ";swc",
+    "body": ["case ${1:value}:", "\t$2", "\tbreak;"]
+  },
+  "Switch Default Statement": {
+    "prefix": ";swd",
+    "body": ["default:", "\t$1", "\tbreak;"]
+  },
+  "ternary": {
+    "prefix": ";t",
+    "body": "${1:cond} ? ${2:true} : ${3:false}"
+  },
+  "find": {
+    "prefix": ";find",
+    "body": ["${1:iterable}.find((${2:item}) => {", "\t${3}", "});"]
+  },
+  "every": {
+    "prefix": ";every",
+    "body": ["${1:iterable}.every((${2:item}) => {", "\t${3}", "});"]
+  },
+  "some": {
+    "prefix": ";some",
+    "body": ["${1:iterable}.some((${2:item}) => {", "\t${3}", "});"]
+  },
+  "forEach loop": {
+    "prefix": ";foreach",
+    "body": ["${1:iterable}.forEach((${2:item}) => {", "\t${3}", "});"]
+  },
+  "filter": {
+    "prefix": ";filter",
+    "body": ["${1:iterable}.filter((${2:item}) => {", "\t${3}", "});"]
+  },
+  "map": {
+    "prefix": ";map",
+    "body": ["${1:iterable}.map(${2:async }(${3:item}) => {", "\t${4}", "});"]
+  },
+  "reduce": {
+    "prefix": ";reduce",
     "body": [
-      "switch (${1:key}) {",
-      "\tcase ${2:value}:",
-      "\t\t$0",
-      "\t\tbreak;",
-      "",
-      "\tdefault:",
-      "\t\tbreak;",
-      "}"
-    ],
-    "description": "Switch Statement"
+      "${1:iterable}.reduce(${2:async }(${3:item}) => {",
+      "\t${4}",
+      "});"
+    ]
+  },
+  "Object.keys": {
+    "prefix": ";ok",
+    "body": "Object.keys(${1:obj})"
+  },
+  "Object.values": {
+    "prefix": ";ov",
+    "body": "Object.values(${1:obj})"
+  },
+  "Object.entries": {
+    "prefix": ";oe",
+    "body": "Object.entries(${1:obj})"
+  },
+  "Object.freeze": {
+    "prefix": ";of",
+    "body": "Object.freeze(${1:obj})"
+  },
+  "named function": {
+    "prefix": ";f",
+    "body": ["${1:async }function ${2:name}(${3:arguments}) {", "\t${4}", "}"]
+  },
+  "arrow function": {
+    "prefix": ";fn",
+    "body": ["${1:async }(${2:arguments}) => {", "\t${3}", "}"]
+  },
+  "named generator": {
+    "prefix": ";fg",
+    "body": ["function* ${1:name}(${2:arguments}) {", "\t${3}", "}"]
   },
   "While Statement": {
-    "prefix": "while",
-    "body": ["while (${1:condition}) {", "\t$0", "}"],
-    "description": "While Statement"
+    "prefix": ";w",
+    "body": ["while (${1:condition}) {", "\t$2", "}"]
   },
   "Do-While Statement": {
-    "prefix": "dowhile",
-    "body": ["do {", "\t$0", "} while (${1:condition});"],
-    "description": "Do-While Statement"
+    "prefix": ";dw",
+    "body": ["do {", "\t$1", "} while (${2:condition});"]
   },
-  "Try-Catch Statement": {
-    "prefix": "trycatch",
-    "body": ["try {", "\t$0", "} catch (${1:error}) {", "\t", "}"],
-    "description": "Try-Catch Statement"
+  "For-Of Loop": {
+    "prefix": ";for",
+    "body": ["for (const ${2:item} of ${1:object}) {", "\t$3", "}"]
+  },
+  "For-Of Await Loop": {
+    "prefix": ";fora",
+    "body": ["for await (const ${2:item} of ${1:object}) {", "\t$3", "}"]
+  },
+  "For Loop Increment": {
+    "prefix": ";fori",
+    "body": [
+      "for (let ${1:i} = 0; ${1:i} < ${2:count}; ${1:i}++) {",
+      "\t$3",
+      "}"
+    ]
+  },
+  "For Loop Decrement": {
+    "prefix": ";ford",
+    "body": [
+      "for (let ${1:i} = ${2:count}; ${1:i} > 0; ${1:i}--) {",
+      "\t$3",
+      "}"
+    ]
+  },
+  "try/finally": {
+    "prefix": ";tf",
+    "body": ["try {", "\t$1", "} finally {", "\t$2", "}"]
+  },
+  "try/catch": {
+    "prefix": ";tc",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (error) {",
+      "\t${2:console.error(error);}$3",
+      "}"
+    ]
+  },
+  "try/catch/finally": {
+    "prefix": ";tcf",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (error) {",
+      "\t${2:console.error(error);}$3",
+      "} finally {",
+      "\t$4",
+      "}"
+    ]
+  },
+  "throw new Error": {
+    "prefix": ";throw",
+    "body": "throw ${1:new Error}$2;"
+  },
+  "debugger statement": {
+    "prefix": ";d",
+    "body": "debugger;"
+  },
+  "describe": {
+    "prefix": ";td",
+    "body": ["describe('${1:description}', () => {", "\t${2}", "});"]
+  },
+  "it asynchronous": {
+    "prefix": ";tt",
+    "body": ["it('${1:description}', ${2:async }() => {", "\t${3}", "});"]
+  },
+  "it.todo": {
+    "prefix": ";ttodo",
+    "body": "it.todo('${1:description}');"
+  },
+  "beforeAll": {
+    "prefix": ";tba",
+    "body": ["beforeAll(${1:async }() => {", "\t${2}", "});"]
+  },
+  "before": {
+    "prefix": ";tbe",
+    "body": ["beforeEach(${1:async }() => {", "\t${2}", "});"]
+  },
+  "afterAll": {
+    "prefix": ";taa",
+    "body": ["afterAll(${1:async }()=> {", "\t${2}", "});"]
+  },
+  "afterEach": {
+    "prefix": ";tae",
+    "body": ["afterEach(${1:async }()=> {", "\t${2}", "});"]
   },
   "Set Timeout Function": {
-    "prefix": "settimeout",
-    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"],
-    "description": "Set Timeout Function"
+    "prefix": ";st",
+    "body": ["setTimeout(() => {", "\t$2", "}, ${1:timeout});"]
   },
-  "Region Start": {
-    "prefix": "#region",
-    "body": ["//#region $0"],
-    "description": "Folding Region Start"
+  "Set Interval Function": {
+    "prefix": ";si",
+    "body": ["setInterval(() => {", "\t$2", "}, ${1:interval});"]
   },
-  "Region End": {
-    "prefix": "#endregion",
-    "body": ["//#endregion"],
-    "description": "Folding Region End"
+  "Promise.all": {
+    "prefix": ";pa",
+    "body": ["${1:await }Promise.all([", "\t${2:value}", "]);"]
+  },
+  "Promise.all map": {
+    "prefix": ";pam",
+    "body": [
+      "${1:await }Promise.all(${2:array}.map(async (${3:value}) => {",
+      "\t${4}",
+      "}));"
+    ]
+  },
+  "await sleep": {
+    "prefix": ";ps",
+    "body": "await new Promise((r) => setTimeout(r, ${1}));"
+  },
+  "Promise.resolve": {
+    "prefix": ";pr",
+    "body": "Promise.resolve(${1:value});"
+  },
+  "Promise.reject": {
+    "prefix": ";pR",
+    "body": "Promise.reject(${1:value});"
+  },
+  "new Promise": {
+    "prefix": ";pn",
+    "body": "new Promise((resolve, reject) => {\n\t${1}\n})"
   }
 }

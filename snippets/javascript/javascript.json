@@ -1,51 +1,47 @@
 {
   "JSON.stringify()": {
     "prefix": ";js",
-    "body": "JSON.stringify($0)"
+    "body": "JSON.stringify($1)"
   },
   "JSON.stringify() pretty": {
     "prefix": ";jsp",
-    "body": "JSON.stringify($0, null, 2)"
+    "body": "JSON.stringify($1, null, 2)"
   },
   "JSON.parse()": {
     "prefix": ";jp",
-    "body": "JSON.parse($0)"
+    "body": "JSON.parse($1)"
   },
   "console.log": {
     "prefix": ";ll",
-    "body": "console.log(${0});"
+    "body": "console.log($1);"
   },
   "console.info": {
     "prefix": ";li",
-    "body": "console.info(${0});"
+    "body": "console.info($1);"
   },
   "console.error": {
     "prefix": ";le",
-    "body": "console.error(${0});"
+    "body": "console.error($1);"
   },
   "console.warn": {
     "prefix": ";lw",
-    "body": "console.warn(${0});"
+    "body": "console.warn($1);"
   },
   "let statement": {
     "prefix": ";l",
-    "body": "let ${2:name} = ${1:value};"
+    "body": "let ${3:dynamic$RANDOM} = ${1:await }$2;"
   },
-  "const statement": {
+  "const assignment": {
     "prefix": ";c",
-    "body": "const ${2:name} = ${1:value};"
-  },
-  "const assignment awaited": {
-    "prefix": ";ca",
-    "body": "const ${2:name} = await ${1:value};"
+    "body": "const ${3:static$RANDOM} = ${1:await }$2;"
   },
   "const arrow function assignment": {
     "prefix": ";cf",
-    "body": "const ${1:name} = (${2:arguments}) => {\n\t${0}\n};"
+    "body": ["const ${1:name} = ${2:async }(${3:arguments}) => {", "\t$4", "};"]
   },
   "process.env": {
     "prefix": ";pe",
-    "body": "const { $0 } = process.env;"
+    "body": "const { $1 } = process.env;"
   },
   "module default": {
     "prefix": ";e",
@@ -67,9 +63,13 @@
     "prefix": ";req",
     "body": "const { ${2} } = require('${1:module}');"
   },
+  "require module": {
+    "prefix": ";reqm",
+    "body": "const $1 = require('${1:module}');"
+  },
   "module.exports": {
     "prefix": ";me",
-    "body": "module.exports = { ${1:name} };"
+    "body": "module.exports = ${1:export};"
   },
   "If Statement": {
     "prefix": ";if",
@@ -81,124 +81,149 @@
   },
   "else statement": {
     "prefix": ";el",
-    "body": "else {\n\t${0}\n}"
+    "body": ["else {", "\t${1}", "}"]
   },
   "else if statement": {
-    "prefix": ";eli",
-    "body": "else if (${1:condition}) {\n\t${0}\n}"
+    "prefix": ";elif",
+    "body": ["else if (${1:condition}) {", "\t${2}", "}"]
   },
   "Switch Statement": {
-    "prefix": ";switch",
-    "body": [
-      "switch (${1:key}) {",
-      "\tcase ${2:value}:",
-      "\t\t$3",
-      "\t\tbreak;$4",
-      "\tdefault:",
-      "\t\t$5",
-      "\t\tbreak;",
-      "}"
-    ]
+    "prefix": ";sw",
+    "body": ["switch (${1:key}) {", "\t$2", "}"]
+  },
+  "Switch Case Statement": {
+    "prefix": ";swc",
+    "body": ["case ${1:value}:", "\t$2", "\tbreak;"]
+  },
+  "Switch Default Statement": {
+    "prefix": ";swd",
+    "body": ["default:", "\t$1", "\tbreak;"]
   },
   "ternary": {
-    "prefix": ";te",
+    "prefix": ";t",
     "body": "${1:cond} ? ${2:true} : ${3:false}"
   },
   "find": {
     "prefix": ";find",
-    "body": "${1:iterable}.find((${2:item}) => {\n\t${0}\n})"
+    "body": ["${1:iterable}.find((${2:item}) => {", "\t${3}", "});"]
   },
   "every": {
     "prefix": ";every",
-    "body": "${1:iterable}.every((${2:item}) => {\n\t${0}\n})"
+    "body": ["${1:iterable}.every((${2:item}) => {", "\t${3}", "});"]
   },
   "some": {
     "prefix": ";some",
-    "body": "${1:iterable}.some((${2:item}) => {\n\t${0}\n})"
+    "body": ["${1:iterable}.some((${2:item}) => {", "\t${3}", "});"]
   },
   "forEach loop": {
     "prefix": ";foreach",
-    "body": "${1:iterable}.forEach((${2:item}) => {\n\t${0}\n});"
-  },
-  "map": {
-    "prefix": ";map",
-    "body": "${1:iterable}.map((${2:item}) => {\n\t${0}\n})"
-  },
-  "reduce": {
-    "prefix": ";reduce",
-    "body": "${1:iterable}.reduce((${2:accum}, ${3:item}) => {\n\t${0}\n}${4:, initial})"
+    "body": ["${1:iterable}.forEach((${2:item}) => {", "\t${3}", "});"]
   },
   "filter": {
     "prefix": ";filter",
-    "body": "${1:iterable}.filter((${2:item}) => {\n\t${0}\n})"
+    "body": ["${1:iterable}.filter((${2:item}) => {", "\t${3}", "});"]
+  },
+  "map": {
+    "prefix": ";map",
+    "body": ["${1:iterable}.map(${2:async }(${3:item}) => {", "\t${4}", "});"]
+  },
+  "reduce": {
+    "prefix": ";reduce",
+    "body": [
+      "${1:iterable}.reduce(${2:async }(${3:item}) => {",
+      "\t${4}",
+      "});"
+    ]
   },
   "Object.keys": {
-    "prefix": ";objk",
+    "prefix": ";ok",
     "body": "Object.keys(${1:obj})"
   },
   "Object.values": {
-    "prefix": ";objv",
+    "prefix": ";ov",
     "body": "Object.values(${1:obj})"
   },
   "Object.entries": {
-    "prefix": ";obje",
+    "prefix": ";oe",
     "body": "Object.entries(${1:obj})"
   },
   "Object.freeze": {
-    "prefix": ";objf",
+    "prefix": ";of",
     "body": "Object.freeze(${1:obj})"
   },
   "named function": {
     "prefix": ";f",
-    "body": "${1:async} function ${2:name}(${3:arguments}) {\n\t${0}\n}"
+    "body": ["${1:async }function ${2:name}(${3:arguments}) {", "\t${4}", "}"]
   },
   "arrow function": {
     "prefix": ";fn",
-    "body": "${1:async} (${2:arguments}) => {\n\t${0}\n}"
-  },
-  "immediately-invoked function expression": {
-    "prefix": ";iife",
-    "body": "(${1:async} function (${2:arguments}) {\n\t${0}\n})(${3});"
+    "body": ["${1:async }(${2:arguments}) => {", "\t${3}", "}"]
   },
   "named generator": {
     "prefix": ";fg",
-    "body": "function* ${1:name}(${2:arguments}) {\n\t${0}\n}"
+    "body": ["function* ${1:name}(${2:arguments}) {", "\t${3}", "}"]
   },
   "While Statement": {
     "prefix": ";w",
-    "body": ["while (${1:condition}) {", "\t$0", "}"]
+    "body": ["while (${1:condition}) {", "\t$2", "}"]
   },
   "Do-While Statement": {
     "prefix": ";dw",
-    "body": ["do {", "\t$0", "} while (${1:condition});"]
+    "body": ["do {", "\t$1", "} while (${2:condition});"]
   },
   "For-Of Loop": {
     "prefix": ";for",
-    "body": ["for $1(const ${3:item} of ${2:object}) {", "\t$0", "}"]
+    "body": ["for (const ${2:item} of ${1:object}) {", "\t$3", "}"]
   },
-  "For Loop": {
+  "For-Of Await Loop": {
+    "prefix": ";fora",
+    "body": ["for await (const ${2:item} of ${1:object}) {", "\t$3", "}"]
+  },
+  "For Loop Increment": {
     "prefix": ";fori",
     "body": [
       "for (let ${1:i} = 0; ${1:i} < ${2:count}; ${1:i}++) {",
-      "\t$0",
+      "\t$3",
       "}"
     ]
   },
-  "try/catch": {
-    "prefix": ";tc",
-    "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$0\n}"
+  "For Loop Decrement": {
+    "prefix": ";ford",
+    "body": [
+      "for (let ${1:i} = ${2:count}; ${1:i} > 0; ${1:i}--) {",
+      "\t$3",
+      "}"
+    ]
   },
   "try/finally": {
     "prefix": ";tf",
-    "body": "try {\n\t$1\n} finally {\n\t$0\n}"
+    "body": ["try {", "\t$1", "} finally {", "\t$2", "}"]
+  },
+  "try/catch": {
+    "prefix": ";tc",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (error) {",
+      "\t${2:console.error(error);}$3",
+      "}"
+    ]
   },
   "try/catch/finally": {
     "prefix": ";tcf",
-    "body": "try {\n\t$1\n} catch (${2:error}) {\n\t$3\n} finally {\n\t$4\n}"
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (error) {",
+      "\t${2:console.error(error);}$3",
+      "} finally {",
+      "\t$4",
+      "}"
+    ]
   },
   "throw new Error": {
     "prefix": ";throw",
-    "body": "throw new ${0:Error($1)};"
+    "body": "throw ${1:new Error}$2;"
   },
   "debugger statement": {
     "prefix": ";d",
@@ -206,11 +231,11 @@
   },
   "describe": {
     "prefix": ";td",
-    "body": "describe('${1:description}', () => {\n\t${0}\n});"
+    "body": ["describe('${1:description}', () => {", "\t${2}", "});"]
   },
   "it asynchronous": {
     "prefix": ";tt",
-    "body": "it('${1:description}', ${2:async }() => {\n\t${0}\n});"
+    "body": ["it('${1:description}', ${2:async }() => {", "\t${3}", "});"]
   },
   "it.todo": {
     "prefix": ";ttodo",
@@ -218,50 +243,54 @@
   },
   "beforeAll": {
     "prefix": ";tba",
-    "body": "beforeAll(${1:async }() => {\n\t${0}\n});"
+    "body": ["beforeAll(${1:async }() => {", "\t${2}", "});"]
   },
   "before": {
     "prefix": ";tbe",
-    "body": "beforeEach(${1:async }() => {\n\t${0}\n});"
+    "body": ["beforeEach(${1:async }() => {", "\t${2}", "});"]
   },
   "afterAll": {
     "prefix": ";taa",
-    "body": "afterAll(${1:async }()=> {\n\t${0}\n});"
+    "body": ["afterAll(${1:async }()=> {", "\t${2}", "});"]
   },
   "afterEach": {
     "prefix": ";tae",
-    "body": "afterEach(${1:async }()=> {\n\t${0}\n});"
+    "body": ["afterEach(${1:async }()=> {", "\t${2}", "});"]
   },
   "Set Timeout Function": {
     "prefix": ";st",
-    "body": ["setTimeout(() => {", "\t$0", "}, ${1:timeout});"]
+    "body": ["setTimeout(() => {", "\t$2", "}, ${1:timeout});"]
   },
   "Set Interval Function": {
     "prefix": ";si",
-    "body": ["setInterval(() => {", "\t$0", "}, ${1:interval});"]
+    "body": ["setInterval(() => {", "\t$2", "}, ${1:interval});"]
   },
-  "await Promise.all": {
+  "Promise.all": {
     "prefix": ";pa",
-    "body": "await Promise.all([\n\t${1:value}\n]);"
+    "body": ["${1:await }Promise.all([", "\t${2:value}", "]);"]
   },
-  "await Promise.all map": {
+  "Promise.all map": {
     "prefix": ";pam",
-    "body": "await Promise.all(${1:array}.map(async (${2:value}) => {\n\t${0}\n}));"
+    "body": [
+      "${1:await }Promise.all(${2:array}.map(async (${3:value}) => {",
+      "\t${4}",
+      "}));"
+    ]
   },
   "await sleep": {
     "prefix": ";ps",
-    "body": "await new Promise((r) => setTimeout(r, ${0}));"
+    "body": "await new Promise((r) => setTimeout(r, ${1}));"
   },
   "Promise.resolve": {
     "prefix": ";pr",
-    "body": "Promise.resolve(${1:value})"
+    "body": "Promise.resolve(${1:value});"
   },
   "Promise.reject": {
     "prefix": ";pR",
-    "body": "Promise.reject(${1:value})"
+    "body": "Promise.reject(${1:value});"
   },
   "new Promise": {
     "prefix": ";pn",
-    "body": "new Promise((resolve, reject) => {\n\t${0}\n})"
+    "body": "new Promise((resolve, reject) => {\n\t${1}\n})"
   }
 }

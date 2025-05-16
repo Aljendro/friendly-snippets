@@ -1,4 +1,18 @@
 {
+  "module": {
+    "prefix": ";mod",
+    "body": [
+      "local M = {}",
+      "",
+      "--- $3",
+      "function M.$1($2)",
+      "$0",
+      "end",
+      "",
+      "return M"
+    ],
+    "description": "Creates a module"
+  },
   "require": {
     "prefix": "req",
     "body": ["require(\"${1:module}\")"],

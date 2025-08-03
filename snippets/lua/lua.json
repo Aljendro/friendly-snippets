@@ -1,6 +1,6 @@
 {
   "module": {
-    "prefix": ";mod",
+    "prefix": "mod",
     "body": [
       "local M = {}",
       "",

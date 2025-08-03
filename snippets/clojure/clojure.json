@@ -1,0 +1,100 @@
+{
+  "println": {
+    "prefix": "ll",
+    "body": "(println $1)"
+  },
+  "let binding": {
+    "prefix": "l",
+    "body": ["(let [${1:binding} ${2:value}]", "\t${3})"]
+  },
+  "def": {
+    "prefix": "d",
+    "body": "(def ${1:name} ${2:value})"
+  },
+  "defn": {
+    "prefix": "df",
+    "body": [
+      "(defn ${1:name}",
+      "\t${2:doc-string?}",
+      "\t[${3:args}]",
+      "\t${4})"
+    ]
+  },
+  "defmacro": {
+    "prefix": "dm",
+    "body": [
+      "(defmacro ${1:name}",
+      "\t${2:doc-string?}",
+      "\t[${3:args}]",
+      "\t${4})"
+    ]
+  },
+  "fn function": {
+    "prefix": "f",
+    "body": "(fn ${1:name?} [${2:args}] ${3})"
+  },
+  "try-catch": {
+    "prefix": "tc",
+    "body": ["(try", "\t${1}", "\t(catch Exception e", "\t${2}))"]
+  },
+  "try-catch-finally": {
+    "prefix": "tcf",
+    "body": [
+      "(try",
+      "\t${1}",
+      "\t(catch Exception e",
+      "\t\t${2})",
+      "\t(finally",
+      "\t\t${3}))"
+    ]
+  },
+  "throw": {
+    "prefix": "throw",
+    "body": "(throw (Exception. \"${1:message}\"))"
+  },
+  "for comprehension": {
+    "prefix": "for",
+    "body": ["(for [${1:x} ${2:coll}]", "\t${3})"]
+  },
+  "doseq": {
+    "prefix": "doseq",
+    "body": ["(doseq [${1:x} ${2:coll}]", "\t${3})"]
+  },
+  "loop-recur": {
+    "prefix": "loop",
+    "body": [
+      "(loop [${1:binding} ${2:init}]",
+      "\t(if ${3:condition}",
+      "\t\t${4:result}",
+      "\t\t(recur ${5:new-value})))"
+    ]
+  },
+  "require": {
+    "prefix": "req",
+    "body": "(:require [${1:namespace} :as ${2:alias}])"
+  },
+  "import": {
+    "prefix": "imp",
+    "body": "(:import ${1:class})"
+  },
+  "deftest": {
+    "prefix": "td",
+    "body": [
+      "(deftest ${1:test-name}",
+      "\t(testing \"${2:description}\"",
+      "\t\t${3}))"
+    ]
+  },
+  "testing": {
+    "prefix": "tt",
+    "body": ["(testing \"${1:description}\"", "\t${2})"]
+  },
+  "is": {
+    "prefix": "is",
+    "body": "(is (= ${1:expected} ${2:actual}))"
+  },
+  "comment": {
+    "prefix": ";;",
+    "body": "(comment ${1})"
+  }
+}

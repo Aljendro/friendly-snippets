@@ -28,7 +28,11 @@
       },
       {
         "language": "clojure",
-        "path": "./snippets/clojure/clojure.json"
+        "path": "./snippets/clojure/main.json"
+      },
+      {
+        "language": "clojure",
+        "path": "./snippets/clojure/record.json"
       },
       {
         "language": "cdoc",

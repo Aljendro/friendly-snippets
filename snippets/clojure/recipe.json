@@ -20,6 +20,10 @@
     "prefix": "rinsf",
     "body": "[:inputaction/set {:var \"$1\" :from \"$2\"}]$0"
   },
+  "Input AWS Secret": {
+    "prefix": "rins",
+    "body": "[:inputaction/aws_secret {:var \"$1\" :name \"$2\" :profile \"$3\"}]$0"
+  },
   "Instruction Create": {
     "prefix": "rac",
     "body": "[:instructionaction/create {:filepath \"$1\" :template \"<t>/$2.template\"}]$0"

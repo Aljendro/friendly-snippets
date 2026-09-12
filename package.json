@@ -32,6 +32,10 @@
       },
       {
         "language": "clojure",
+        "path": "./snippets/clojure/recipe.json"
+      },
+      {
+        "language": "clojure",
         "path": "./snippets/clojure/record.json"
       },
       {

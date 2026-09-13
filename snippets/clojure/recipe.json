@@ -28,6 +28,10 @@
     "prefix": "rac",
     "body": "[:instructionaction/create {:filepath \"$1\" :template \"<t>/$2.template\"}]$0"
   },
+  "Instruction Delete": {
+    "prefix": "rad",
+    "body": "[:instructionaction/delete {:filepath \"$1\"}]$0"
+  },
   "Instruction Update": {
     "prefix": "rau",
     "body": "[:instructionaction/update {:filepath \"$1\" :template \"<t>/$2.template\" :target \"$3\"}]$0"

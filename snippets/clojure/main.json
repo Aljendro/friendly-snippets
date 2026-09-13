@@ -23,6 +23,10 @@
     "prefix": "pl",
     "body": "(println $1)"
   },
+  "Print Variable": {
+    "prefix": "pv",
+    "body": "(println \"$CLIPBOARD = \" $CLIPBOARD)"
+  },
   "Print TODO": {
     "prefix": "ptodo",
     "body": "(println \"TODO: Implement me\")"

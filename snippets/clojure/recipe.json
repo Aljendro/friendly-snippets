@@ -10,34 +10,38 @@
   },
   "Input User": {
     "prefix": "rinu",
-    "body": "[:inputaction/user {:var \"$1\" :default \"$2\"}]$0"
+    "body": "[:user {:var \"$1\" :default \"$2\"}]$0"
   },
   "Input Set With": {
     "prefix": "rinsw",
-    "body": "[:inputaction/set {:var \"$1\" :with \"$2\"}]$0"
+    "body": "[:set {:var \"$1\" :with \"$2\"}]$0"
   },
   "Input Set From": {
     "prefix": "rinsf",
-    "body": "[:inputaction/set {:var \"$1\" :from \"$2\"}]$0"
+    "body": "[:set {:var \"$1\" :from \"$2\"}]$0"
   },
   "Input AWS Secret": {
     "prefix": "rins",
-    "body": "[:inputaction/aws_secret {:var \"$1\" :name \"$2\" :profile \"$3\"}]$0"
+    "body": "[:aws_secret {:var \"$1\" :name \"$2\" :profile \"$3\"}]$0"
   },
   "Instruction Create": {
     "prefix": "rac",
-    "body": "[:instructionaction/create {:filepath \"$1\" :template \"<t>/$2.template\"}]$0"
+    "body": "[:create {:filepath \"$1\" :template \"<t>/$2.template\"}]$0"
+  },
+  "Instruction Directory": {
+    "prefix": "rad",
+    "body": "[:dir {:filepath \"$1\"}]$0"
   },
   "Instruction Delete": {
     "prefix": "rad",
-    "body": "[:instructionaction/delete {:filepath \"$1\"}]$0"
+    "body": "[:delete {:filepath \"$1\"}]$0"
   },
   "Instruction Update": {
     "prefix": "rau",
-    "body": "[:instructionaction/update {:filepath \"$1\" :template \"<t>/$2.template\" :target \"$3\"}]$0"
+    "body": "[:update {:filepath \"$1\" :template \"<t>/$2.template\" :target \"$3\"}]$0"
   },
   "Instruction Nvim": {
     "prefix": "ran",
-    "body": "[:instructionaction/nvim {:filepath \"$1\" :commands \"$2\"}]$0"
+    "body": "[:nvim {:filepath \"$1\" :commands \"$2\"}]$0"
   }
 }
